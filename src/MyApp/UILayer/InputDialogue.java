@@ -1,17 +1,12 @@
-package MyApp;
+package MyApp.UILayer;
 
 /**
  * Created by jonb on 23/09/16 to illustrate the use of UI-layer, App-layer, and Data-Layer architecture
  */
 
-import java.util.*;
+import java.util.Scanner;
 
-public class UILayer {
-
-    public void showHelperText(String sText)
-    {
-        System.out.print(sText);
-    }
+public class InputDialogue {
 
     public String getInputLineFromKeyboard() {
         String sInputText = "";

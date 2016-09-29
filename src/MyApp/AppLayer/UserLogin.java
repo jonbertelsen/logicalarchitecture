@@ -1,12 +1,17 @@
-package MyApp;
+package MyApp.AppLayer;
 
 /**
  * Created by jonb on 23/09/16 to illustrate the use of UI-layer, App-layer, and Data-Layer architecture
  */
 
+import MyApp.DataLayer.ReadUserData;
+import MyApp.UILayer.InputDialogue;
+import MyApp.UILayer.OutputText;
+import com.sun.tools.doclets.internal.toolkit.util.DocFinder;
+
 import java.util.HashMap;
 
-public class AppLayer {
+public class UserLogin {
 
     private HashMap<String, String> hmUserLookup;
     public boolean loginGranted;
@@ -15,9 +20,9 @@ public class AppLayer {
 
     // Constructor: fill hmUserLookup with users and their passwords
 
-    AppLayer() {
+    UserLogin() {
         loginGranted = false;
-        DataLayer dataObject = new DataLayer();
+        ReadUserData dataObject = new ReadUserData();
         hmUserLookup = dataObject.readLoginFile();
     }
 
@@ -42,24 +47,25 @@ public class AppLayer {
     public void enterAndCheckUserCredentials()
     {
         // Instantiate UIlayer:
-        UILayer UI = new UILayer();
+        InputDialogue UIInput = new InputDialogue();
+        OutputText UIOutput = new OutputText();
 
         String sUserName = "";
         String sUserPassword = "";
 
-        UI.showHelperText("Indtast brugernavn (email): ");
-        sUserName = UI.getInputLineFromKeyboard();
+        UIOutput.showHelperText("Indtast brugernavn (email): ");
+        sUserName = UIInput.getInputLineFromKeyboard();
 
-        UI.showHelperText("Indtast password: ");
-        sUserPassword = UI.getInputLineFromKeyboard();
+        UIOutput.showHelperText("Indtast password: ");
+        sUserPassword = UIInput.getInputLineFromKeyboard();
 
         if (checkUserCredentials(sUserName, sUserPassword))
         {
-            UI.showHelperText("Login granted for: " + sUserName);
+            UIOutput.showHelperText("Login granted for: " + sUserName);
         }
         else
         {
-            UI.showHelperText("Login denied, please try again");
+            UIOutput.showHelperText("Login denied, please try again");
         }
 
     }

@@ -1,4 +1,4 @@
-package MyApp;
+package MyApp.DataLayer;
 
 /**
  * Created by jonb on 23/09/16 to illustrate the use of UI-layer, App-layer, and Data-Layer architecture
@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.io.*;
 import java.nio.file.Paths;
 
-public class DataLayer {
+public class ReadUserData {
 
     public HashMap<String, String> readLoginFile()
     {
@@ -23,7 +23,7 @@ public class DataLayer {
  try
     {
         try {
-            inputfile = new Scanner(new File(sSrcRoot + "/src/MyApp/users.txt"));
+            inputfile = new Scanner(new File(sSrcRoot + "/src/MyApp/DataLayer/users.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
