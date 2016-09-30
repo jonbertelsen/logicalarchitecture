@@ -7,7 +7,6 @@ package MyApp.AppLayer;
 import MyApp.DataLayer.ReadUserData;
 import MyApp.UILayer.InputDialogue;
 import MyApp.UILayer.OutputText;
-import com.sun.tools.doclets.internal.toolkit.util.DocFinder;
 
 import java.util.HashMap;
 
