@@ -14,17 +14,22 @@ public class User {
     public boolean loginGranted;
     public String sUserName;
     public String sUserPassword;
+
     private UserData dataObject;
+    private InputDialogue UIInput;
+    private OutputText UIOutput;
 
-    // Constructor: fill hmUserLookup with users and their passwords
+    // Constructor: hmUserLookup contains a pointer to users and their passwords and UI object for input and output
 
-    public User(UserData dataObjectParam)
+    public User(UserData dataObjectParam, InputDialogue UIInputParam, OutputText UIOutputParam)
     {
         dataObject = dataObjectParam;
+        UIInput = UIInputParam;
+        UIOutput = UIOutputParam;
         loginGranted = false;
     }
 
-    public boolean checkUserCredentials(String sUsernameParam, String sUserPasswordParam)
+    private boolean checkUserCredentials(String sUsernameParam, String sUserPasswordParam)
     {
 
         if (dataObject.checkUserCredentialsInHashmap(sUsernameParam, sUserPasswordParam))
@@ -45,10 +50,6 @@ public class User {
 
     public void enterAndCheckUserCredentials()
     {
-        // Instantiate UIlayer:
-        InputDialogue UIInput = new InputDialogue();
-        OutputText UIOutput = new OutputText();
-
         String sUserName = "";
         String sUserPassword = "";
 
