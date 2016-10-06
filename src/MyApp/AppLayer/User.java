@@ -4,30 +4,30 @@ package MyApp.AppLayer;
  * Created by jonb on 23/09/16 to illustrate the use of UI-layer, App-layer, and Data-Layer architecture
  */
 
-import MyApp.DataLayer.ReadUserData;
+import MyApp.DataLayer.UserData;
 import MyApp.UILayer.InputDialogue;
 import MyApp.UILayer.OutputText;
 
-import java.util.HashMap;
+public class User {
 
-public class UserLogin {
 
-    private HashMap<String, String> hmUserLookup;
     public boolean loginGranted;
     public String sUserName;
     public String sUserPassword;
+    private UserData dataObject;
 
     // Constructor: fill hmUserLookup with users and their passwords
 
-    UserLogin() {
+    public User(UserData dataObjectParam)
+    {
+        dataObject = dataObjectParam;
         loginGranted = false;
-        ReadUserData dataObject = new ReadUserData();
-        hmUserLookup = dataObject.readLoginFile();
     }
 
-    private boolean checkUserCredentials(String sUsernameParam, String sUserPasswordParam)
+    public boolean checkUserCredentials(String sUsernameParam, String sUserPasswordParam)
     {
-        if (sUserPasswordParam.equals(hmUserLookup.get(sUsernameParam)))
+
+        if (dataObject.checkUserCredentialsInHashmap(sUsernameParam, sUserPasswordParam))
         {
             sUserName = sUsernameParam;
             sUserPassword = sUserPasswordParam;
@@ -37,7 +37,7 @@ public class UserLogin {
         else
         {
             sUserName = "";
-            sUserPassword = sUserPasswordParam;
+            sUserPassword = "";
             loginGranted = false;
             return false;
         }
@@ -60,11 +60,11 @@ public class UserLogin {
 
         if (checkUserCredentials(sUserName, sUserPassword))
         {
-            UIOutput.showHelperText("Login granted for: " + sUserName);
+            UIOutput.showHelperTextLn("Login granted for: " + sUserName);
         }
         else
         {
-            UIOutput.showHelperText("Login denied, please try again");
+            UIOutput.showHelperTextLn("Login denied, please try again");
         }
 
     }

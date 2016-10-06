@@ -13,4 +13,9 @@ public class OutputText {
         System.out.print(sText);
     }
 
+    public void showHelperTextLn(String sText)
+    {
+        System.out.println(sText);
+    }
+
 }

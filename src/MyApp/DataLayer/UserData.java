@@ -9,9 +9,18 @@ import java.util.Scanner;
 import java.io.*;
 import java.nio.file.Paths;
 
-public class ReadUserData {
+public class UserData
+{
 
-    public HashMap<String, String> readLoginFile()
+    private HashMap<String,String> hmUserLookup;
+
+    // Constructor: fill hmUserLookup with users and their passwords
+    public UserData()
+    {
+        hmUserLookup = readLoginFile();
+    }
+
+    private HashMap<String, String> readLoginFile()
     {
         String[] sLoginCredentials;
         Scanner inputfile = null;
@@ -20,27 +29,37 @@ public class ReadUserData {
 
         // Read user names and passwords line by line from file and store in hashtable
 
- try
-    {
-        try {
-            inputfile = new Scanner(new File(sSrcRoot + "/src/MyApp/DataLayer/users.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        try
+        {
+            try
+            {
+                inputfile = new Scanner(new File(sSrcRoot + "/src/MyApp/DataLayer/users.txt"));
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
 
-        while (inputfile.hasNextLine()) {
-            sLoginCredentials = inputfile.nextLine().split(",");
-            hmUserLookup.put(sLoginCredentials[0], sLoginCredentials[1]);
+            while (inputfile.hasNextLine())
+            {
+                sLoginCredentials = inputfile.nextLine().split(",");
+                hmUserLookup.put(sLoginCredentials[0], sLoginCredentials[1]);
+            }
         }
-    }
-    finally
-    {
-        if (inputfile != null) {
-            inputfile.close();
+        finally
+        {
+            if (inputfile != null)
+            {
+                inputfile.close();
+            }
         }
-    }
-        return hmUserLookup;
+            return hmUserLookup;
 
+    }
+
+    public boolean checkUserCredentialsInHashmap(String sUsernameParam, String sUserPasswordParam)
+    {
+        return sUserPasswordParam.equals(hmUserLookup.get(sUsernameParam));
     }
 
 }
